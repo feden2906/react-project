@@ -1,23 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
+import {useEffect, useState} from 'react';
+import {getPost, getPosts} from "./servises/API";
+import Posts from "./posts/Posts";
 
 function App() {
+
+let [post, setPost] = useState(null);
+
+let appFn = (id)=>{
+  getPost(id).then(value => setPost(value.data));
+}
+
+  let [posts, setPosts] = useState([]);
+  useEffect(()=> {
+    getPosts().then(value => setPosts(value.data));
+  },[]);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <div>
+<Posts items={posts} appFn={appFn}/>
+      <hr/>
+      {post && <div>{JSON.stringify(post)}</div>};
+      <hr/>
     </div>
   );
 }
