@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+.post{
+
+  margin: 20px;
+  background: #e8b8c8;
+  border-radius: 20px;
+  padding: 10px;
+}
+.users{
+  display: flex;
+  justify-content: space-between;
+  margin: 15px;
+  padding: 10px;
+  background: #add8e3;
+  border-radius: 20px;
+}
+.user{
+  margin-left: 30px;
+}
+.btn{
+  margin-right: 30px;
+  background: #61dafb;
+  border-radius: 10px;
+}

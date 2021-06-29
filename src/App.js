@@ -3,12 +3,13 @@ import './App.css';
 import {useEffect, useState} from 'react';
 import {getUser, getUsers, getUserPosts} from "./servises/API";
 import Users from "./components/users/Users";
+import UserPost from "./components/userPost/UserPost";
 
-function App() {
+export default function App() {
 
-    let [userposts, setUserposts] = useState(null);
+    let [userPosts, setUserPosts] = useState([]);
     let appFn = (id) => {
-        getUserPosts(id).then(value => setUserposts(value.data));
+        getUserPosts(id).then(value => setUserPosts(value.data));
     }
 
     let [users, setUsers] = useState([]);
@@ -21,9 +22,12 @@ function App() {
         <div>
             <Users items={users} appFn={appFn}/>
             <hr/>
-            {userposts && <div>{JSON.stringify(userposts)}</div>}
+            {
+                userPosts.map((value) => {
+                    return <UserPost key={value.id} item={value}/>
+                })
+            }
         </div>
     );
-}
 
-export default App;
+}
