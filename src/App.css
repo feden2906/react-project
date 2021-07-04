@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+.links{
+  margin: 10px;
+  height: 60px;
+  width: 800px;
+  display: flex;
+  justify-content:space-evenly;
+  align-items: center;
+  background: rosybrown;
+  border-radius: 20px;
+  font-size: 24px;
+}
+
+.user, .post{
+  width: 800px;
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 10px;
+  background: #eacfcf;
+  border-radius: 30px;
+        }
+button{
+  border-radius: 20px;
+  background: rosybrown;
+  }
