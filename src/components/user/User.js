@@ -1,8 +1,10 @@
 import {getUserPosts} from "../../servises/API";
 import {useState} from "react";
+import Post from "../post/Post";
 
 export default function User ({singleUser, fromApp}){
-    let[posts,setPosts] = useState([]);
+    let[posts,setPosts] = useState('');
+
     return (
         <div className='user'>
             <h3>{singleUser.id} - {singleUser.name}</h3>
@@ -14,8 +16,10 @@ export default function User ({singleUser, fromApp}){
                 <p>{singleUser.website}</p>
                 <button
                 onClick={
-                    ()=> {fromApp(singleUser.id);
-                getUserPosts (singleUser.id).then(value=> setPosts(value));}}>Show posts</button>
+                    ()=>getUserPosts (singleUser.id).then(value=> setPosts(value.data))}>Show posts</button>
+            </div>
+            <div>
+                {posts && posts.map(value=> <Post item={value}/>)}
             </div>
         </div>
     );

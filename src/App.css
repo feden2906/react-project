@@ -48,7 +48,7 @@
   font-size: 24px;
 }
 
-.user, .post{
+.user {
   width: 800px;
   box-sizing: border-box;
   padding: 20px;
@@ -60,3 +60,10 @@ button{
   border-radius: 20px;
   background: rosybrown;
   }
+.post{
+  background: #825d5d;
+  padding: 20px;
+}
+.comments{
+  background: rosybrown;
+}

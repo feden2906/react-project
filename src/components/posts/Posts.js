@@ -4,7 +4,7 @@ import Post from "../post/Post";
 
 
 
-export default function Posts (props){
+export default function Posts ({showComments}){
    const [posts, setPosts] = useState([]);
    useEffect(()=>{
        getPosts().then(value => setPosts(value.data));
@@ -12,7 +12,7 @@ export default function Posts (props){
     return (
         <div>
             {
-                posts.map((value) => <Post item={value} key ={value.id}/>)
+                posts.map((value) => <Post key={value.id} showComments ={showComments} item={value} key ={value.id}/>)
             }
 
         </div>
