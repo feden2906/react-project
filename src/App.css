@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+.title{
+  height: 60px;
+  width: 600px;
+  background: #bec7b6;
+  margin: 5px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user{
+  height: 40px;
+  width: 600px;
+  background: #b6c1a6;
+  margin: 5px;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
