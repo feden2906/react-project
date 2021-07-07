@@ -1,29 +1,23 @@
-import {getFCP} from "web-vitals";
-import {useEffect, useState} from "react";
+import {useEffect, useState} from 'react'
+import {getUsers} from "../../servises/API";
 import User from "../user/User";
+import {Route, Switch} from 'react-router-dom';
+import UserDetails from "../userDetails/UserDetails";
 
-
-export default function Users() {
-
-    let [users, setUsers] = useState([]);
-
-
+export default function Users(props) {
+    const [users, setUsers] = useState([]);
     useEffect(() => {
-        fetch('http://jsonplaceholder.typicode.com/users')
-            .then(value => value.json())
-            .then(user => {
-                setUsers(user)
-            });
-    }, []);
+        getUsers().then(value => setUsers([...value.data]));
+    }, [])
 
 
     return (
-        <div> {
-           users.map(user => <User item = {user}/>)
+        <div>{
+            users.map(value => <User key={value.id} item={value}/>)
         }
+            <Switch>
+                <Route path={'/users/:id'} component={UserDetails}/>
+            </Switch>
         </div>
     );
 }
-
-
-

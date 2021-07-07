@@ -1,8 +1,9 @@
-export default function User (props){
-    let {item} = props;
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+
+export default function User({item}) {
     return (
-        <div>
-            {item.id} - {item.name}
+        <div className='user'>
+            <div>{item.name}</div>  <div><Link to={'/users/' + item.id}>user details</Link></div>
         </div>
     );
 }

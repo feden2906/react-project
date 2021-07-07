@@ -1,22 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
-import Menu from './components/menu/Menu';
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import Users from "./components/users/Users";
 
 function App() {
-    return (
 
-        <div>
-            <Menu
-                pages={['users page', 'coments page', 'posts page']}
-                classes = {['target', 'vvv']}
-            />
-            <Users/>
-            <Menu
-                pages={['about', 'contact us']}
-                classes = {['target', 'mmm']}
-            />
-        </div>
+
+    return (
+        <Router>
+            <div>
+                <div className='userLink'><Link to={'/users'}>users page</Link></div>
+                <Switch>
+                    <Route path={'/users'} component={Users}/>
+                </Switch>
+            </div>
+        </Router>
+
 
     );
 }
