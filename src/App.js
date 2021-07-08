@@ -6,6 +6,11 @@ const NesteChild = () => {
     const counter = useSelector(({counter: {value}}) => value)
     const dispatch = useDispatch();
 
+    function getNumber(e){
+        e.preventDefault()
+    }
+
+
     return (
         <header className="App-header">
             <h1>{counter}</h1>
@@ -29,6 +34,12 @@ const NesteChild = () => {
                 }
                 }>recet
             </button>
+
+            <form onSubmit={getNumber}>
+                <input type="number" name='number'/>
+                <button onClick={()=>{
+                    dispatch({type:'INC_CUSTOM'})}}>ok</button>
+            </form>
         </header>
     )
 }

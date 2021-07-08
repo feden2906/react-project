@@ -9,8 +9,8 @@ import {Provider} from 'react-redux'
 const initialState = {
     counter: {
         value: 0
-    },
-    posts: [],
+    }
+
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -38,6 +38,15 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 counter: {
                     value: 0
+                }
+            }
+        }
+
+        case 'INC_CUSTOM': {
+            return {
+                ...state,
+                counter: {
+                    // value: state.counter.value + input.value
                 }
             }
         }
