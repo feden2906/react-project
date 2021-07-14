@@ -3,6 +3,8 @@ import './App.css';
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {todosReducer} from "./reducers/todosReduser";
+import {ADD_TODOS, PUSH_NEW_TODO, SET_LOADING_FALSE, SET_LOADING_TRUE} from "./redux/actionTypes";
+import {addTodos, pushNewTodo, setLoadingFalse, setLoadingTrue} from "./redux/actionCreators";
 
 
 const CreateTodoForm = ({onSubmit}) => {
@@ -46,42 +48,44 @@ const CreateTodoForm = ({onSubmit}) => {
     )
 }
 
-const TodoList = ({todos, isLoading})=>{
+const TodoList = ({todos, isLoading}) => {
+    if (isLoading) return <h1>Loading....</h1>
 
-
-    return(
+    return (
         <div>
-            {
-                todos.map(todo=>(
+            {todos.map(todo => (
                     <div>
                         <h4>{todo.title}</h4>
                         <p>{todo.description}</p>
+                        <span>Created At:{new Date(todo.createdAt).toLocaleString()}</span>
+                        <hr/>
                     </div>
                 ))}
         </div>
     )
 }
 
+
 function App() {
 
-    const {todos} = useSelector(({todosReducer}) => todosReducer)
-    const dispatch = useDispatch()
+    const {todos, isLoading} = useSelector(({todosReducer}) => todosReducer);
+    const dispatch = useDispatch();
 
-useEffect(()=>{
-    fetchTodos()
-},[])
-    const fetchTodos = async ()=>{
+    useEffect(() => {
+        fetchTodos()
+    }, []);
+    const fetchTodos = async () => {
         try {
-            const response = await fetch('https://localhost:8888/get-todos')
+            dispatch(setLoadingTrue())
+            const response = await fetch('http://localhost:8888/get-todos');
             const data = await response.json();
-            dispatch({type:'ADD_TODOS', payload: data})
+            dispatch(addTodos(data))
         } catch (e) {
             console.log(e)
         } finally {
-
+            dispatch(setLoadingFalse())
         }
     }
-
 
 
     const onTodoCreate = async (title, description) => {
@@ -92,15 +96,15 @@ useEffect(()=>{
             headers: {
                 'Content-Type': 'application/json'
             }
-
         })
         const data = await response.json();
+        dispatch(pushNewTodo(data))
         console.log(data)
     }
     return (
-        <div>
+        <div className='App'>
             <CreateTodoForm onSubmit={onTodoCreate}/>
-            <TodoList todos={todos}/>
+            <TodoList todos={todos} isLoading={isLoading}/>
         </div>
     );
 }
