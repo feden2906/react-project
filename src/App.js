@@ -1,23 +1,25 @@
 import './App.css';
-import {createRef} from "react";
+import Form from "./form/Form";
+import {useEffect, useState} from "react";
+import UserInfo from "./userInfo/UserInfo";
 
 function App() {
-let myFormRef = createRef();
-let myButton = createRef();
-  const onFormSubmit =(e)=>{
-    e.preventDefault();
-    console.log(e.target.username.value);
-    console.log(myFormRef.current.username.value);
-    console.log(myButton.current)
-  };
-  return (
-    <div>
-      <form action={'/someUrl'} method={'post'} onSubmit={onFormSubmit} ref={myFormRef}>
-        <input type="text" name={'username'}/>
-        <button ref={myButton}>save</button>
-      </form>
-    </div>
-  );
-}
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    fetch('http://jsonplaceholder.typicode.com/users')
+        .then(value => value.json())
+        .then(value => {
+          setUsers([...value])
+        })
+  }, [])
 
+
+  return (
+      <div>
+        <div><Form users={users}/></div>
+        {/*<div><UserInfo item={value}/></div>*/}
+      </div>
+  );
+
+}
 export default App;
