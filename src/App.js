@@ -1,24 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import {createRef} from "react";
 
 function App() {
+let myFormRef = createRef();
+let myButton = createRef();
+  const onFormSubmit =(e)=>{
+    e.preventDefault();
+    console.log(e.target.username.value);
+    console.log(myFormRef.current.username.value);
+    console.log(myButton.current)
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <form action={'/someUrl'} method={'post'} onSubmit={onFormSubmit} ref={myFormRef}>
+        <input type="text" name={'username'}/>
+        <button ref={myButton}>save</button>
+      </form>
     </div>
   );
 }
