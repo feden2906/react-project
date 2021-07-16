@@ -5,8 +5,9 @@ import UserInfo from "./userInfo/UserInfo";
 
 function App() {
   const [users, setUsers] = useState([]);
+  const [chosenUser, setChosenUser] = useState(null)
   useEffect(() => {
-    fetch('http://jsonplaceholder.typicode.com/users')
+    fetch('https://jsonplaceholder.typicode.com/users')
         .then(value => value.json())
         .then(value => {
           setUsers([...value])
@@ -16,8 +17,10 @@ function App() {
 
   return (
       <div>
-        <div><Form users={users}/></div>
-        {/*<div><UserInfo item={value}/></div>*/}
+        <div><Form users={users} setChosenUser={setChosenUser} /></div>
+          {
+              chosenUser && <UserInfo item={chosenUser}/>
+          }
       </div>
   );
 

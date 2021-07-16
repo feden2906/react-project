@@ -1,13 +1,11 @@
 export default function UserInfo ({item}){
     return (
-        <div>
-            {item.id}-{item.name}
-            <br/>
-            {item.username}
-            <br/>
-            {item.email}, {item.phone}
-            <br/>
-            {item.website}
+        <div className='info'>
+            <h2>{item.id}-{item.name}</h2>
+            <h3>{item.username}</h3>
+            <p>{item.email}, {item.phone}
+                <br/>
+                {item.website}</p>
         </div>
     );
 }
